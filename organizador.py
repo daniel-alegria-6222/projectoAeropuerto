@@ -7,7 +7,7 @@ class Organizador:
         self.vuelos = list()
         self.atencionDe6AvionesCada30Minutos = "?"
 
-    def showVuelos ( fecha = Fecha.today() ):
+    def showVuelosEnFecha ( fecha = Fecha.today() ):
         pass
 
     def getInfoVuelo ( user ):
