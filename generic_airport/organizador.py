@@ -1,6 +1,6 @@
 
-from fechahora import Fecha, Hora
-from vuelo import Vuelo
+from generic_airport.fechahora import Fecha, Hora
+from generic_airport.vuelo import Vuelo
 
 class Organizador:
     def __init__ ( self ):

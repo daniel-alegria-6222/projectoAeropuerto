@@ -1,5 +1,5 @@
 
-from fechahora import Fecha, Hora
+from generic_airport.fechahora import Fecha, Hora
 
 class Avion:
     def __init__ ( self ):
