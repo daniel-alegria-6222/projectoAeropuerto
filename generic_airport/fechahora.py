@@ -26,8 +26,14 @@ class Fecha:
         if Fecha.isLeapYear( year ):
             DAYS_IN_MONTH[1] = 29
 
+    @staticmethod
+    def newFromStr ( fecha_string ):
+        # fecha_string tienen la forma 'dd-mm-yyyy'
+        return Fecha( *fecha_string.split("-") )
+
+
     def __str__ ( self ):
-        return f"{self.day} de {Fecha.MONTHS[self.month-1]}"
+        return f"{self.day}-{Fecha.MONTHS[self.month-1]}-{self.year}"
 
     def __eq__ ( self, other ):
         return ( self.day   == other.day   and 

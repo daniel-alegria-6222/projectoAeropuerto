@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('flight_board') }}">Flight's Board</a>
+            <a class="nav-link" href="{{ url_for('flight_board', date='today') }}">Flight's Board</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url_for('users') }}">Users</a>

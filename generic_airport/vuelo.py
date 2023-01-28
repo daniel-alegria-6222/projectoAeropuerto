@@ -7,7 +7,6 @@ class Avion:
         self.altura
         self.longitudAla
         self.capacidad_Toneladas
-        self.pasajeros = list()
 
 class Vuelo:
     ESTADOS = ["confirmado", "cancelado", "retrasado"]
@@ -24,3 +23,4 @@ class Vuelo:
         self.estado    = estado
         self.destino   = destino
         self.origen    = origen
+        self.pasajeros = list()

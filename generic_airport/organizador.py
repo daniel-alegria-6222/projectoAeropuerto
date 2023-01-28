@@ -7,6 +7,7 @@ class Organizador:
         self.vuelos = list()
         self.atencionDe6AvionesCada30Minutos = "?"
 
+
     def showVuelosEnFecha ( fecha = Fecha.today() ):
         pass
 
@@ -18,13 +19,13 @@ class Organizador:
             setattr(vuelo, attribute, value)
 
 
-    def incluir ( vuelo: Vuelo ):
+    def incluirVuelo ( vuelo: Vuelo ):
         pass
 
-    def modificar ( vuelo: Vuelo ):
+    def modificarVuelo ( vuelo: Vuelo ):
         pass
 
-    def excluir ( vuelo: Vuelo ):
+    def excluirVuelo ( vuelo: Vuelo ):
         pass
 
 

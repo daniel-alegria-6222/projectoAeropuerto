@@ -2,9 +2,9 @@ from generic_airport.fechahora import Fecha
 
 class Pasajero:
     def __init__ ( self, nombreCompleto, telefono, email, dni, fechaNacimiento ):
-        self.nombreCompleto
-        self.telefono
-        self.email
-        self.dni
-        self.fechaNacimiento
+        self.nombreCompleto  = nombreCompleto
+        self.telefono        = telefono
+        self.email           = email
+        self.dni             = dni
+        self.fechaNacimiento = fechaNacimiento
 
