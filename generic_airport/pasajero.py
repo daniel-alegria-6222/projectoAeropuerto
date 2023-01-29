@@ -8,3 +8,7 @@ class Pasajero:
         self.dni             = dni
         self.fechaNacimiento = fechaNacimiento
 
+    def __eq__ ( self, otherPassenger):
+        return self.dni == otherPassenger.dni
+
+

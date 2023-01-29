@@ -5,6 +5,7 @@ from generic_airport.vuelo import Vuelo
 class Organizador:
     def __init__ ( self ):
         self.vuelos = list()
+        self.usuarios = list()
         self.atencionDe6AvionesCada30Minutos = "?"
 
 
