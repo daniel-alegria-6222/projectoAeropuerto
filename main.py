@@ -5,13 +5,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
-import re
 
 import generic_airport as ga
 from generic_airport import Organizador
 
 
-date_pattern = re.compile(r"\d\d-\d\d-\d\d\d\d")
 org = ga.Organizador()
 
 app = Flask(__name__)
@@ -45,7 +43,7 @@ class VueloForm(FlaskForm):
     avion      = StringField("Avion", validators=validators)
     fecha      = StringField("Fecha (dd-mm-yyyy)", validators=validators)
     hora       = StringField("Hora", validators=validators)
-    estado     = SelectField("estado", choices=ga.Vuelo.ESTADOS, validators=validators)
+    estado     = SelectField("Estado", choices=ga.Vuelo.ESTADOS, validators=validators)
     destino    = StringField("Destino", validators=validators)
     origen     = StringField("Origen", validators=validators)
     submit     = SubmitField("Submit") 
@@ -69,7 +67,7 @@ def index():
 def flight_board ( date:str ):
     if date == "today":
         date = str(ga.Fecha.today())
-    elif not date_pattern.match( date ):
+    elif not ga.Fecha.isFechaStr(date):
         return "<h1>ROUTE ERROR:</h1>\n<p>You should access specific dates with the format 'dd-mm-yyyy'</p>"
     vuelos = org.getVuelosByFecha( ga.Fecha.newFromStr(date) )
     return render_template("flight_board.html", date=date, vuelos=vuelos)
@@ -78,13 +76,18 @@ def flight_board ( date:str ):
 def user():
     form = UserForm()
     if form.validate_on_submit():
+        date = ga.Fecha.newFromStr( str(form.fechaNacimiento.data).strip(" ") )
+        if date is None:
+            flash("Fecha de nacimiento invalida")
+            return render_template("user.html", form=form)
+
         success = org.incluirUsuario(
             ga.Usuario(
                 form.nombreCompleto.data,
                 form.telefono.data,
                 form.email.data,
                 form.dni.data,
-                ga.Fecha.newFromStr(form.fechaNacimiento.data),
+                date
             )
         )
         if success:
@@ -131,12 +134,22 @@ def op_vuelos ():
     # Muestra, modifica, filtra
     form = VueloForm()
     if form.validate_on_submit():
+        date = ga.Fecha.newFromStr( str(form.fecha.data).strip(" ") )
+        hour = ga.Hora.newFromStr( str(form.hora.data).strip(" ") )
+
+        if date is None:
+            flash("Fecha invalida")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
+        if hour is None:
+            flash("Hora invalida")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
+
         vuelo = ga.Vuelo(
                 form.nroVuelo.data,
                 form.aerolinea.data,
                 form.avion.data,
-                ga.Fecha.newFromStr(form.fecha.data),
-                form.hora.data,
+                date,
+                hour,
                 form.estado.data,
                 form.destino.data,
                 form.origen.data,
@@ -191,13 +204,22 @@ def op_vuelo_update(id):
     form = VueloForm()
 
     if form.validate_on_submit():
+        date = ga.Fecha.newFromStr( str(form.fecha.data).strip(" ") )
+        hour = ga.Hora.newFromStr( str(form.hora.data).strip(" ") )
+
+        if date is None:
+            flash("Fecha invalida")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
+        if hour is None:
+            flash("Hora invalida")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
 
         vuelo = ga.Vuelo(
                 form.nroVuelo.data,
                 form.aerolinea.data,
                 form.avion.data,
-                ga.Fecha.newFromStr(form.fecha.data),
-                form.hora.data,
+                date,
+                hour,
                 form.estado.data,
                 form.destino.data,
                 form.origen.data,
@@ -214,7 +236,7 @@ def op_vuelo_update(id):
 
 @app.route ( '/operator/vuelo_delete/<int:id>' )
 def op_vuelo_delete(id):
-    org.deleteVuelo(id)
+    org.deleteVuelo( org.getVueloByNro(id) )
     return redirect( "/operator/vuelos" )
 
 ### EXTRA
