@@ -10,20 +10,12 @@
 
 <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.nombreCompleto.label( class="form-label") }}
-    {{ form.nombreCompleto( class="form-control" ) }}
-    <br/>
-    {{ form.telefono.label( class="form-label") }}
-    {{ form.telefono( class="form-control" ) }}
-    <br/>
-    {{ form.email.label( class="form-label") }}
-    {{ form.email( class="form-control" ) }}
-    <br/>
+
     {{ form.dni.label( class="form-label") }}
     {{ form.dni( class="form-control" ) }}
     <br/>
-    {{ form.fechaNacimiento.label( class="form-label") }}
-    {{ form.fechaNacimiento( class="form-control" ) }}
+    {{ form.nroVuelo.label( class="form-label") }}
+    {{ form.nroVuelo( class="form-control" ) }}
     <br/>
     {{ form.submit( class="btn btn-secondary") }}
     <br/>

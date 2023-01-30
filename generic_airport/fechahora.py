@@ -24,16 +24,19 @@ class Fecha:
         self.month   = month # 1..12
         self.year    = year
         if Fecha.isLeapYear( year ):
-            DAYS_IN_MONTH[1] = 29
+            self.DAYS_IN_MONTH[1] = 29
+
+    def getNamedMonth ( self ):
+        return Fecha.MONTHS[self.month-1]
 
     @staticmethod
     def newFromStr ( fecha_string ):
         # fecha_string tienen la forma 'dd-mm-yyyy'
-        return Fecha( *fecha_string.split("-") )
+        return Fecha( *[int(e) for e in fecha_string.split("-")] )
 
 
     def __str__ ( self ):
-        return f"{self.day}-{Fecha.MONTHS[self.month-1]}-{self.year}"
+        return f"{self.day:02}-{self.month:02}-{self.year:04}"
 
     def __eq__ ( self, other ):
         return ( self.day   == other.day   and 
@@ -46,7 +49,7 @@ class Hora:
         self.minute  = minute
 
     def __str__ ( self ):
-        return f"{hour.self}:{self.minute}"
+        return f"{self.hour}:{self.minute}"
 
     def __eq__ ( self, other ):
         return self.hour == other.hour and self.minute == other.minute

@@ -1,6 +1,83 @@
-{% extends "base_operator.html" %}
+{% extends "op_base.html" %}
 {% block content %}
 
-<p>Pagina de vuelos</p>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.nroVuelo.label( class="form-label") }}
+    {{ form.nroVuelo( class="form-control" ) }}
+
+    {{ form.aerolinea.label( class="form-label") }}
+    {{ form.aerolinea( class="form-control" ) }}
+
+    {{ form.avion.label( class="form-label") }}
+    {{ form.avion( class="form-control" ) }}
+
+    {{ form.fecha.label( class="form-label") }}
+    {{ form.fecha( class="form-control" ) }}
+
+    {{ form.hora.label( class="form-label") }}
+    {{ form.hora( class="form-control" ) }}
+
+    {{ form.estado.label( class="form-label") }}
+    {{ form.estado( class="form-control" ) }}
+
+    {{ form.destino.label( class="form-label") }}
+    {{ form.destino( class="form-control" ) }}
+
+    {{ form.origen.label( class="form-label") }}
+    {{ form.origen( class="form-control" ) }}
+
+    {#
+        {{ form.pasajeros.label( class="form-label") }}
+        {{ form.pasajeros( class="form-control" ) }}
+        <br/>
+    #}
+
+    {{ form.submit( class="btn btn-secondary") }}
+    <br/>
+</form>
+<br/>
+<br/>
+<br/>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Nro. Vuelo</th>
+        <th>Aerolinea</th>
+        <th>Avion</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Destino</th>
+        <th>Origen</th>
+        <!-- <th>Pasajeros</th> -->
+        <th></th>
+        <th></th>
+    </tr>
+{% for vuelo in vuelos %}
+    <tr>
+        <td>{{ vuelo.nroVuelo }}</td>
+        <td>{{ vuelo.aerolinea }}</td>
+        <td>{{ vuelo.avion }}</td>
+        <td>{{ vuelo.fecha }}</td>
+        <td>{{ vuelo.hora }}</td>
+        <td>{{ vuelo.estado }}</td>
+        <td>{{ vuelo.destino }}</td>
+        <td>{{ vuelo.origen }}</td>
+        <!-- <td>{{ vuelo.pasajeros }}</td> -->
+        <th><a href="{{ url_for('op_vuelo_delete', id=vuelo.nroVuelo) }}" class="btn btn-outline-danger btn-sm">delete</a></th>
+        <th><a href="{{ url_for('op_vuelo_update', id=vuelo.nroVuelo) }}" class="btn btn-secondary btn-sm">update</a></th>
+    </tr>
+
+{% endfor %}
+</table>
 
 {% endblock %}

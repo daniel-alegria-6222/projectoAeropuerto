@@ -1,4 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>FLIGHT INFORMATION OF {{date}}</h1>
+VUELOS DE {{date}}
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Nro. Vuelo</th>
+        <th>Aerolinea</th>
+        <th>Avion</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Destino</th>
+        <th>Origen</th>
+        <!-- <th>Pasajeros</th> -->
+    </tr>
+
+{% for vuelo in vuelos %}
+    <tr>
+        <td>{{ vuelo.nroVuelo }}</td>
+        <td>{{ vuelo.aerolinea }}</td>
+        <td>{{ vuelo.avion }}</td>
+        <td>{{ vuelo.fecha }}</td>
+        <td>{{ vuelo.hora }}</td>
+        <td>{{ vuelo.estado }}</td>
+        <td>{{ vuelo.destino }}</td>
+        <td>{{ vuelo.origen }}</td>
+        <!-- <td>{{ vuelo.pasajeros }}</td> -->
+    </tr>
+
+{% endfor %}
+</table>
+
 {% endblock %}

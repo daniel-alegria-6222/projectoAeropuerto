@@ -1,0 +1,55 @@
+{% extends "op_base.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.codigo.label( class="form-label") }}
+    {{ form.codigo( class="form-control" ) }}
+
+    {{ form.autonomiaDeVueloKM.label( class="form-label") }}
+    {{ form.autonomiaDeVueloKM( class="form-control" ) }}
+
+    {{ form.altura.label( class="form-label") }}
+    {{ form.altura( class="form-control" ) }}
+
+    {{ form.longitudAla.label( class="form-label") }}
+    {{ form.longitudAla( class="form-control" ) }}
+
+    {{ form.capacidadToneladas.label( class="form-label") }}
+    {{ form.capacidadToneladas( class="form-control" ) }}
+
+    {{ form.submit( class="btn btn-secondary") }}
+</form>
+<br/>
+<br/>
+<br/>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Codigo</th>
+        <th>Autonomia De Vuelo</th>
+        <th>Altura</th>
+        <th>Longitud Ala</th>
+        <th>Capacidad (Toneladas)</th>
+    </tr>
+{% for avion in aviones %}
+    <tr>
+        <td>{{ avion.codigo }}</td>
+        <td>{{ avion.autonomiaDeVueloKM }}</td>
+        <td>{{ avion.altura }}</td>
+        <td>{{ avion.longitudAla }}</td>
+        <td>{{ avion.capacidadToneladas }}</td>
+    </tr>
+
+{% endfor %}
+</table>
+
+{% endblock %}
