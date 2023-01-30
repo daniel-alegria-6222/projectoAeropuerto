@@ -1,11 +1,10 @@
 
 from generic_airport.fechahora import Fecha, Hora
-from generic_airport.usuario import Usuario
 
 class Avion:
     def __init__ ( self,
             codigo, autonomiaDeVueloKM, altura, longitudAla, capacidadToneladas ):
-        self.codigo = codigo
+        self.codigo = str(codigo)
         self.autonomiaDeVueloKM = autonomiaDeVueloKM
         self.altura = altura
         self.longitudAla = longitudAla
@@ -36,6 +35,9 @@ class Vuelo:
     def __eq__ ( self, other ):
         return self.nroVuelo == other.nroVuelo
 
-    def incluirPasajero( dni ):
-        self.pasajeros.append( dni )
+    def addPasajero( self, dni ):
+        if dni not in self.pasajeros:
+            self.pasajeros.append( dni )
+            return True
+        return False
 

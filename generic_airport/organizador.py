@@ -26,6 +26,12 @@ class Organizador:
             if str(vuelo.nroVuelo) == str(nroVuelo):
                 return vuelo
         return None
+
+    def getUsuarioByNro ( self, dni ):
+        for user in self.usuarios:
+            if str(user.dni) == str(dni):
+                return user
+        return None
 #######
 
 

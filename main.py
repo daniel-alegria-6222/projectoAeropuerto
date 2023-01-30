@@ -99,29 +99,34 @@ def book():
     form = BookForm()
     if form.validate_on_submit():
         nroVuelo = str(form.nroVuelo.data).strip(" ")
+        dni =      str(form.dni.data).strip(" ")
+
         ok = True
 
-        if nroVuelo.isdigit():
-            if not org.getVueloByNro( nroVuelo ):
-                flash("Error: nroVuelo no existe")
-                ok = False
-        elif nroVuelo != "":
+
+        if not nroVuelo.isdigit():
             flash("Error: nroVuelo no es un digito")
             ok = False
         else:
-            nroVuelo = None
+            flash("Error: vuelo con 'nroVuelo' provisto no existe")
+            ok = False
 
+        if not dni.isdigit():
+            flash("Error: dni no es un digito")
+            ok = False
+        else:
+            flash("Error: usuario con 'dni' provisto no existe")
+            ok = False
 
-        # flash("Error: nroVuelo no es un digito")
-        # flash("Error: nroVuelo no existe")
 
         if ok :
-            pass
-            # success = org.( form.dni.data, nroVuelo )
-            # if success:
-            #     flash("Added user successfully")
-            # else:
-            #     flash("Couldn't add user")
+            org.getVueloByNro  ( nroVuelo ).addPasajero( dni      )
+            org.getUsuarioByNro( dni      ).addViaje   ( nroVuelo )
+
+            if success:
+                flash("Added user to flight")
+            else:
+                flash("Couldn't add user")
 
     return render_template("book.html", form=form)
 
