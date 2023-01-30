@@ -1,0 +1,67 @@
+{% extends "op_base.html" %}
+{% block content %}
+
+<h2> <center>
+    Datos del Vuelo
+</center> </h2>
+
+<table class="table table-hover table-bordered table-striped">
+<tr>
+    <td>Numero de Vuelo</td>
+    <td>{{ vuelo.nroVuelo }}</td>
+</tr>
+    <td>Aerolinea</td>
+    <td>{{ vuelo.aerolinea }}</td>
+</tr>
+    <td>Avion</td>
+    <td>{{ vuelo.avion }}</td>
+</tr>
+    <td>Fecha</td>
+    <td>{{ vuelo.fecha }}</td>
+</tr>
+    <td>Hora</td>
+    <td>{{ vuelo.hora }}</td>
+</tr>
+    <td>Estado</td>
+    <td>{{ vuelo.estado }}</td>
+</tr>
+    <td>Destino</td>
+    <td>{{ vuelo.destino }}</td>
+</tr>
+    <td>Origen</td>
+    <td>{{ vuelo.origen }}</td>
+</tr>
+</table>
+
+
+<br/>
+<h2> <center>
+    Pasajeros
+</center> </h2>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Nombre Completo</th>
+        <th>Telefono</th>
+        <th>Email</th>
+        <th>dni</th>
+        <th>Fecha de Nacimiento</th>
+    </tr>
+{% for pasaj in pasajeros %}
+    <tr>
+        <td>{{ pasaj.nombreCompleto }}</td>
+        <td>{{ pasaj.telefono }}</td>
+        <td>{{ pasaj.email }}</td>
+        <td>{{ pasaj.dni }}</td>
+        <td>{{ pasaj.fechaNacimiento }}</td>
+        <th><a href="{{ url_for('user_info', id=pasaj.dni) }}" class="btn btn-secondary btn-sm">viajes</a></th>
+{% endfor %}
+</table>
+
+<br/>
+<h2> <center>
+<a href="{{ url_for('op_vuelos') }}" class="btn btn-secondary btn-sm">Back</a>
+</center> </h2>
+
+
+{% endblock %}

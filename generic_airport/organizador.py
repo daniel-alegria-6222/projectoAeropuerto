@@ -13,6 +13,19 @@ class Organizador:
         pass
 
 #######
+    def getViajesDeUsuario ( self, user ):
+        rpta = list()
+        for nroVuelo in user.viajes:
+            rpta.append( self.getVueloByNro(nroVuelo) )
+        return rpta
+
+    def getPasajerosDeVuelo ( self, vuelo ):
+        rpta = list()
+        for dni in vuelo.pasajeros:
+            rpta.append( self.getUsuarioByNro(dni) )
+        return rpta
+
+#######
     def getVuelosByFecha ( self, fecha = Fecha.today() ):
         rpta = list()
         for vuelo in self.vuelos:

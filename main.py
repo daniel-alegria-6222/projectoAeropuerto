@@ -72,14 +72,14 @@ def flight_board ( date:str ):
     vuelos = org.getVuelosByFecha( ga.Fecha.newFromStr(date) )
     return render_template("flight_board.html", date=date, vuelos=vuelos)
 
-@app.route ( '/user/', methods=['GET', 'POST'] )
-def user():
+@app.route ( '/user/signup', methods=['GET', 'POST'] )
+def user_signup():
     form = UserForm()
     if form.validate_on_submit():
         date = ga.Fecha.newFromStr( str(form.fechaNacimiento.data).strip(" ") )
         if date is None:
             flash("Fecha de nacimiento invalida")
-            return render_template("user.html", form=form)
+            return render_template("user_signup.html", form=form)
 
         success = org.incluirUsuario(
             ga.Usuario(
@@ -95,7 +95,14 @@ def user():
         else:
             flash("Couldn't add user")
 
-    return render_template("user.html", form=form)
+    return render_template("user_signup.html", form=form)
+
+@app.route ( '/user/<int:id>' )
+def user_info(id):
+    user=org.getUsuarioByNro(id)
+    if not user:
+        return f"<h3>Error: usuario con dni '{id}' not found</h3>"
+    return render_template( "user_info.html",  user=user, vuelos=org.getViajesDeUsuario(user) )
 
 @app.route ( '/book/', methods=['GET', 'POST'] )
 def book():
@@ -169,7 +176,7 @@ def op_vuelos ():
 
 @app.route ( '/operator/' )
 def op_index():
-    return op_vuelos()
+    return redirect("/operator/vuelos")
 
 @app.route ( '/operator/aviones/', methods=['GET', 'POST']  )
 def op_aviones():
@@ -195,7 +202,7 @@ def op_aviones():
 def op_gerenciales():
     return render_template("op_gerenciales.html")
 
-@app.route ( '/operator/users/' )
+@app.route ( '/operator/users' )
 def op_users():
     # Muestra, modifica, filtra
     return render_template("op_users.html", usuarios=org.usuarios )
@@ -246,6 +253,13 @@ def op_vuelo_update(id):
 def op_vuelo_delete(id):
     org.deleteVuelo( org.getVueloByNro(id) )
     return redirect( "/operator/vuelos" )
+
+@app.route ( '/operator/passengers/<int:id>' )
+def op_pasajeros(id):
+    vuelo = org.getVueloByNro(id)
+    if not vuelo:
+        return f"<h3>Error: vuelo de nro '{id}' not found</h3>"
+    return render_template( "op_pasajeros.html",  vuelo=vuelo, pasajeros=org.getPasajerosDeVuelo(vuelo) )
 
 ### EXTRA
 @app.route ( '/operator/save/' )

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2> <center>
+    Datos del Usuario
+</center> </h2>
+
+<table class="table table-hover table-bordered table-striped">
+<tr>
+    <td>Nombre Completo</td>
+    <td>{{ user.nombreCompleto }}</td>
+</tr>
+    <td>Telefono</td>
+    <td>{{ user.telefono }}</td>
+</tr>
+    <td>Email</td>
+    <td>{{ user.email }}</td>
+</tr>
+    <td>dni</td>
+    <td>{{ user.dni }}</td>
+</tr>
+    <td>Fecha de Nacimiento</td>
+    <td>{{ user.fechaNacimiento }}</td>
+</tr>
+</table>
+
+
+<br/>
+<h2> <center>
+    Viajes
+</center> </h2>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Nro. Vuelo</th>
+        <th>Aerolinea</th>
+        <th>Avion</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Destino</th>
+        <th>Origen</th>
+    </tr>
+{% for vuelo in vuelos %}
+    <tr>
+        <td>{{ vuelo.nroVuelo }}</td>
+        <td>{{ vuelo.aerolinea }}</td>
+        <td>{{ vuelo.avion }}</td>
+        <td>{{ vuelo.fecha }}</td>
+        <td>{{ vuelo.hora }}</td>
+        <td>{{ vuelo.estado }}</td>
+        <td>{{ vuelo.destino }}</td>
+        <td>{{ vuelo.origen }}</td>
+{% endfor %}
+</table>
+
+
+{% endblock %}
