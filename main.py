@@ -28,13 +28,13 @@ class UserForm(FlaskForm):
     nombreCompleto  = StringField("Name", validators=validators)
     telefono        = StringField("Phone number", validators=validators)
     email           = StringField("Email", validators=validators)
-    dni             = StringField("ID", validators=validators)
+    dni             = StringField("DNI", validators=validators)
     fechaNacimiento = StringField("Birthdate (dd-mm-yyyy)", validators=validators)
     submit     = SubmitField("Submit") 
 
 class BookForm(FlaskForm):
     validators = [DataRequired()]
-    dni        = StringField("ID", validators=validators)
+    dni        = StringField("DNI", validators=validators)
     nroVuelo   = StringField("Nro. Vuelo", validators=validators)
     submit = SubmitField("Submit") 
 
@@ -98,35 +98,29 @@ def user():
 def book():
     form = BookForm()
     if form.validate_on_submit():
-        nroVuelo = str(form.nroVuelo.data).strip(" ")
         dni =      str(form.dni.data).strip(" ")
-
+        nroVuelo = str(form.nroVuelo.data).strip(" ")
         ok = True
-
-
-        if not nroVuelo.isdigit():
-            flash("Error: nroVuelo no es un digito")
-            ok = False
-        else:
-            flash("Error: vuelo con 'nroVuelo' provisto no existe")
-            ok = False
 
         if not dni.isdigit():
             flash("Error: dni no es un digito")
             ok = False
-        else:
+        elif not org.getUsuarioByNro( dni ) :
             flash("Error: usuario con 'dni' provisto no existe")
+            ok = False
+
+        if not nroVuelo.isdigit():
+            flash("Error: nroVuelo no es un digito")
+            ok = False
+        elif not org.getVueloByNro( nroVuelo ):
+            flash("Error: vuelo con 'nroVuelo' provisto no existe")
             ok = False
 
 
         if ok :
             org.getVueloByNro  ( nroVuelo ).addPasajero( dni      )
             org.getUsuarioByNro( dni      ).addViaje   ( nroVuelo )
-
-            if success:
-                flash("Added user to flight")
-            else:
-                flash("Couldn't add user")
+            flash("Added user to flight")
 
     return render_template("book.html", form=form)
 
