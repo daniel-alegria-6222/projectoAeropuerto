@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4><center>Creacion de Usuarios</center></h4>
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.nombreCompleto.label( class="form-label") }}
+    {{ form.nombreCompleto( class="form-control", value=ant_user.nombreCompleto ) }}
+    <br/>
+    {{ form.telefono.label( class="form-label") }}
+    {{ form.telefono( class="form-control", value=ant_user.telefono ) }}
+    <br/>
+    {{ form.email.label( class="form-label") }}
+    {{ form.email( class="form-control", value=ant_user.email ) }}
+    <br/>
+    {{ form.dni.label( class="form-label") }}
+    {{ form.dni( class="form-control", value=ant_user.dni ) }}
+    <br/>
+    {{ form.fechaNacimiento.label( class="form-label") }}
+    {{ form.fechaNacimiento( class="form-control", value=ant_user.fechaNacimiento ) }}
+    <br/>
+    {{ form.submit( class="btn btn-secondary") }}
+    <br/>
+</form>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "op_base.html" %}
+{% block content %}
+
+<h4><center>Modificacion de Vuelos</center></h4>
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<form method="POST" >
+    {{ form.hidden_tag() }}
+
+    {{ form.codigo.label( class="form-label") }}
+    {{ form.codigo( class="form-control", value=ant_avion.codigo ) }}
+
+    {{ form.autonomiaDeVueloKM.label( class="form-label") }}
+    {{ form.autonomiaDeVueloKM( class="form-control", value=ant_avion.autonomiaDeVueloKM ) }}
+
+    {{ form.altura.label( class="form-label") }}
+    {{ form.altura( class="form-control", value=ant_avion.altura ) }}
+
+    {{ form.longitudAla.label( class="form-label") }}
+    {{ form.longitudAla( class="form-control", value=ant_avion.longitudAla ) }}
+
+    {{ form.capacidadToneladas.label( class="form-label") }}
+    {{ form.capacidadToneladas( class="form-control", value=ant_avion.capacidadToneladas ) }}
+
+
+    {{ form.submit( class="btn btn-secondary") }}
+    <br/>
+</form>
+
+{% endblock %}

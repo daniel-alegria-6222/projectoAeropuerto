@@ -86,10 +86,22 @@ class Organizador:
         return False
 
     def updateUsuario ( self, ant_user, user ):
-        pass
+        i = 0
+        while i < len(self.usuarios):
+            if self.usuarios[i] == ant_user :
+                self.usuarios[i] = user
+                return True
+            i += 1
+        return False
 
     def deleteUsuario ( self, user :Usuario ):
-        pass
+        i = 0
+        while i < len(self.usuarios):
+            if self.usuarios[i] == user:
+                del self.usuarios[i]
+                return True
+            i += 1
+        return False
 
     ### AVIONES
     def incluirAvion ( self, avion :Avion ):
@@ -99,10 +111,22 @@ class Organizador:
         return False
 
     def updateAvion ( self, ant_avion, avion ):
-        pass
+        i = 0
+        while i < len(self.aviones):
+            if self.aviones[i] == ant_avion :
+                self.aviones[i] = avion
+                return True
+            i += 1
+        return False
 
     def deleteAvion ( self, avion :Avion ):
-        pass
+        i = 0
+        while i < len(self.aviones):
+            if self.aviones[i] == avion:
+                del self.aviones[i]
+                return True
+            i += 1
+        return False
 
 
     ### Operaciones gerenciales

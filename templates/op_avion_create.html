@@ -40,6 +40,7 @@
         <th>Altura</th>
         <th>Longitud Ala</th>
         <th>Capacidad (Toneladas)</th>
+        <th colspan=2><center></center></th>
     </tr>
 {% for avion in aviones %}
     <tr>
@@ -48,6 +49,8 @@
         <td>{{ avion.altura }}</td>
         <td>{{ avion.longitudAla }}</td>
         <td>{{ avion.capacidadToneladas }}</td>
+        <th><a href="{{ url_for('op_avion_delete', id=avion.codigo) }}" class="btn btn-outline-danger btn-sm">delete</a></th>
+        <th><a href="{{ url_for('op_avion_update', id=avion.codigo) }}" class="btn btn-outline-secondary btn-sm">update</a></th>
     </tr>
 
 {% endfor %}
