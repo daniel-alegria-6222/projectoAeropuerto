@@ -18,8 +18,14 @@ En el directorio del projecto, correr el server local:
         python -m flask --app=main.py --debug run
 
 
-Abrir los links principales del server:
+### Modo de uso
+Abrir los links principales del server y se veran varias funciones:
 
 http://127.0.0.1:5000/
 
-http://127.0.0.1:5000/operator/vuelos
+http://127.0.0.1:5000/operator
+
+
+Tambien se puede ver informacion y vuelos de un usuario con
+
+http://127.0.0.1:5000/user/$dni
