@@ -1,7 +1,14 @@
 ### Que es esto?
+
 Repositorio para un projecto dejado en el curso de 'PROGRAMACION I', enero 2023
 
+#### Integrantes
+- Alegria Sallo Daniel Rodrigo  (215270)
+- Conde Sallo Mihail Johan      (215783)
+- Sotelo Quispe Julio Cesar     (215791)
+
 ### Como correr el codigo?
+
 Instalar los requerimientos:
 
         pip install -r requirements.txt
