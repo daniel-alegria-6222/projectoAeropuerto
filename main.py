@@ -200,7 +200,7 @@ def op_aviones():
 
 @app.route ( '/operator/operaciones_gerenciales/' )
 def op_gerenciales():
-    return render_template("op_gerenciales.html")
+    return render_template("op_gerenciales.html", vuelosPorMes=org.nroVuelosPorMes())
 
 @app.route ( '/operator/users' )
 def op_users():
@@ -261,9 +261,9 @@ def op_pasajeros(id):
         return f"<h3>Error: vuelo de nro '{id}' not found</h3>"
     return render_template( "op_pasajeros.html",  vuelo=vuelo, pasajeros=org.getPasajerosDeVuelo(vuelo) )
 
+
 ### EXTRA
 @app.route ( '/operator/save/' )
 def op_save():
-    # Muestra, modifica, filtra
-    org.guardarDatos()
+    # org.guardarDatos()
     return "<h1> Saved Successfully </h1>"

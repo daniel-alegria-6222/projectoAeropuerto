@@ -1,6 +1,17 @@
 {% extends "op_base.html" %}
 {% block content %}
-
-<p>Pagina de Operaciones gerenciales</p>
+<h3><center>Numero de Vuelos por Mes</center></h3>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Mes</th>
+        <th>Nro de Vuelos</th>
+    </tr>
+{% for key in vuelosPorMes %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ vuelosPorMes[key] }}</td>
+    </tr>
+{% endfor %}
+</table>
 
 {% endblock %}
