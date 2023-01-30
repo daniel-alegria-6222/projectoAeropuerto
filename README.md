@@ -21,19 +21,12 @@ En el directorio del projecto, correr el server local:
 ## Modo de uso
 Abrir los links principales del server y se veran varias funciones:
 
-http://127.0.0.1:5000/
-
-http://127.0.0.1:5000/operator
-
+- http://127.0.0.1:5000/
+- http://127.0.0.1:5000/operator
 
 
-Tambien se puede ver informacion y vuelos de un usuario con:
+Tambien se puede ver informacion, actualizar y eliminar un usuario con:
 
-http://127.0.0.1:5000/user/${DNI}
-
-
-Ademas de actualizar y eliminar un usuario con:
-
-http://127.0.0.1:5000/user/update/${DNI}
-
-http://127.0.0.1:5000/user/delete/${DNI}
+- http://127.0.0.1:5000/user/${DNI}
+- http://127.0.0.1:5000/user/update/${DNI}
+- http://127.0.0.1:5000/user/delete/${DNI}
