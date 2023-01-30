@@ -1,17 +1,17 @@
 from generic_airport.fechahora import Fecha
 
 class Usuario:
-    def __init__ ( self, nombreCompleto, telefono, email, dni, fechaNacimiento ):
+    def __init__ ( self, nombreCompleto, telefono, email, dni, fechaNacimiento, viajes=[] ):
         self.nombreCompleto  = nombreCompleto
         self.telefono        = telefono
         self.email           = email
         self.dni             = str(dni)
         self.fechaNacimiento = fechaNacimiento
-        # lista de codigos
-        self.viajes = list()
+        # lista de nroVuelo
+        self.viajes = viajes
 
-    def __eq__ ( self, otherPassenger):
-        return self.dni == otherPassenger.dni
+    def __eq__ ( self, user):
+        return self.dni == user.dni
 
     def addViaje ( self, nroVuelo ):
         if nroVuelo not in self.viajes:

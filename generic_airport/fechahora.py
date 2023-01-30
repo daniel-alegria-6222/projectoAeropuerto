@@ -1,6 +1,9 @@
 from datetime import date
+from re import compile
 
 class Fecha:
+    date_pattern = compile(r"^\d\d-\d\d-\d\d\d\d$")
+
     MONTHS = [
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
         "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre",
@@ -14,10 +17,6 @@ class Fecha:
     def isLeapYear ( year ):
         return (year % 4 == 0 and year % 100 != 0 ) or ( year % 400 == 0 )
 
-    @staticmethod
-    def today ( ):
-        t = date.today() 
-        return Fecha( t.day, t.month, t.year )
 
     def __init__ (self, day, month, year ):
         self.day     = day
@@ -30,9 +29,19 @@ class Fecha:
         return Fecha.MONTHS[self.month-1]
 
     @staticmethod
+    def isFechaStr ( fecha_string ):
+        return Fecha.date_pattern.match( fecha_string )
+
+    @staticmethod
     def newFromStr ( fecha_string ):
-        # fecha_string tienen la forma 'dd-mm-yyyy'
-        return Fecha( *[int(e) for e in fecha_string.split("-")] )
+        if Fecha.isFechaStr(fecha_string):
+            # fecha_string tienen la forma 'dd-mm-yyyy'
+            return Fecha( *[int(e) for e in fecha_string.split("-")] )
+
+    @staticmethod
+    def today (  ):
+        t = date.today()
+        return Fecha( t.day, t.month, t.year )
 
 
     def __str__ ( self ):
@@ -44,6 +53,8 @@ class Fecha:
                  self.year  == other.year  )
 
 class Hora:
+    time_pattern = compile(r"^\d\d:\d\d$")
+
     def __init__ (self, hour, minute):
         self.hour    = hour
         self.minute  = minute
@@ -53,4 +64,14 @@ class Hora:
 
     def __eq__ ( self, other ):
         return self.hour == other.hour and self.minute == other.minute
+
+    @staticmethod
+    def isHoraStr ( hora_string ):
+        return Hora.time_pattern.match( hora_string )
+
+    @staticmethod
+    def newFromStr ( hora_string ):
+        if Hora.isHoraStr(hora_string):
+            # fecha_string tienen la forma 'hh:mm'
+            return Hora( *[int(e) for e in hora_string.split(":")] )
 

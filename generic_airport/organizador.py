@@ -1,5 +1,5 @@
 
-from generic_airport.fechahora import Fecha, Hora
+from generic_airport.fechahora import Fecha
 from generic_airport.vuelo import Vuelo, Avion
 from generic_airport.usuario import Usuario
 
@@ -8,7 +8,6 @@ class Organizador:
         self.vuelos = list()
         self.usuarios = list()
         self.aviones = list()
-        self.atencionDe6AvionesCada30Minutos = "?"
 
     def guardarDatos ( self, filename = "dataout.txt" ):
         pass
@@ -52,7 +51,13 @@ class Organizador:
         return False
 
     def deleteVuelo ( self, vuelo :Vuelo ):
-        pass
+        i = 0
+        while i < len(self.vuelos):
+            if self.vuelos[i] == vuelo:
+                del self.vuelos[i]
+                return True
+            i += 1
+        return False
 
     ### USUARIOS
     def incluirUsuario ( self, user :Usuario ):
@@ -83,7 +88,10 @@ class Organizador:
 
     ### Operaciones gerenciales
     def nroVuelosPorMes ( self ):
-        pass
+        rpta = { key:0 for key in Fecha.MONTHS }
+        for vuelo in self.vuelos:
+            rpta[vuelo.fecha.getNamedMonth()] += 1
+        return rpta
 
     def calcularGanacia ( self ):
         # for vuelo in self.vuelos:
@@ -92,5 +100,7 @@ class Organizador:
     def advertencia ( self ):
         pass
 
-    def enumerarPasajerosEnVuelo ( self):
+
+    ### lista de pasajeros en un vuelo
+    def enumerarPasajerosEnVuelo ( self, vuelo ):
         pass

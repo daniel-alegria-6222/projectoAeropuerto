@@ -19,7 +19,7 @@ class Vuelo:
 
     def __init__ ( self, nroVuelo, aerolinea,
                    avion, fecha, hora,
-                   estado, destino, origen, pasajeros=None):
+                   estado, destino, origen, pasajeros=[]):
 
         self.nroVuelo  = str(nroVuelo)
         self.aerolinea = aerolinea
@@ -30,7 +30,7 @@ class Vuelo:
         self.destino   = destino
         self.origen    = origen
         # lista de dni's
-        self.pasajeros = list()
+        self.pasajeros = pasajeros
 
     def __eq__ ( self, other ):
         return self.nroVuelo == other.nroVuelo
