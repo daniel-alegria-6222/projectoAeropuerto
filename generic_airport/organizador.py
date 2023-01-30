@@ -31,6 +31,12 @@ class Organizador:
             if str(user.dni) == str(dni):
                 return user
         return None
+
+    def getAvionByNro ( self, codigo ):
+        for avion in self.aviones:
+            if str(avion.codigo) == str(codigo):
+                return avion
+        return None
 #######
 
 

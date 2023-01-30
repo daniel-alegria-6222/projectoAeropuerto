@@ -23,7 +23,7 @@ class Vuelo:
 
         self.nroVuelo  = str(nroVuelo)
         self.aerolinea = aerolinea
-        self.avion     = avion
+        self.avion     = avion # solo es el codigo del avion, no el objeto
         self.fecha     = fecha
         self.hora      = hora
         self.estado    = estado

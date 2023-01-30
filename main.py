@@ -134,9 +134,13 @@ def op_vuelos ():
     # Muestra, modifica, filtra
     form = VueloForm()
     if form.validate_on_submit():
-        date = ga.Fecha.newFromStr( str(form.fecha.data).strip(" ") )
-        hour = ga.Hora.newFromStr( str(form.hora.data).strip(" ") )
+        avion = org.getAvionByNro( str(form.avion.data).strip(" ") )
+        date  = ga.Fecha.newFromStr( str(form.fecha.data).strip(" ") )
+        hour  = ga.Hora.newFromStr( str(form.hora.data).strip(" ") )
 
+        if avion is None:
+            flash("Avion no existe")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
         if date is None:
             flash("Fecha invalida")
             return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
@@ -147,7 +151,7 @@ def op_vuelos ():
         vuelo = ga.Vuelo(
                 form.nroVuelo.data,
                 form.aerolinea.data,
-                form.avion.data,
+                avion.codigo,
                 date,
                 hour,
                 form.estado.data,
@@ -204,9 +208,13 @@ def op_vuelo_update(id):
     form = VueloForm()
 
     if form.validate_on_submit():
+        avion = org.getAvionByNro( str(form.avion.data).strip(" ") )
         date = ga.Fecha.newFromStr( str(form.fecha.data).strip(" ") )
         hour = ga.Hora.newFromStr( str(form.hora.data).strip(" ") )
 
+        if avion is None:
+            flash("Avion no existe")
+            return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
         if date is None:
             flash("Fecha invalida")
             return render_template("op_vuelos.html", vuelos=org.vuelos, form=form) 
@@ -217,7 +225,7 @@ def op_vuelo_update(id):
         vuelo = ga.Vuelo(
                 form.nroVuelo.data,
                 form.aerolinea.data,
-                form.avion.data,
+                avion.codigo,
                 date,
                 hour,
                 form.estado.data,
