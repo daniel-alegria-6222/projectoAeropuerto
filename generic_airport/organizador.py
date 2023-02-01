@@ -137,8 +137,7 @@ class Organizador:
         return rpta
 
     def calcularGanacia ( self ):
-        # for vuelo in self.vuelos:
-        pass
+        return len(self.vuelos) * 15000
 
     def advertencia ( self ):
         pass

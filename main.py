@@ -16,10 +16,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "no importa ahora"
 
 
-import os
-def out( value ):
-    os.system(f"echo '{str(value)}'>> out.txt")
-
 ## Create a form class
 class UserForm(FlaskForm):
     validators = [DataRequired()]
