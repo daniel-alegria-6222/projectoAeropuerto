@@ -7,7 +7,6 @@ from wtforms.validators import DataRequired
 
 
 import generic_airport as ga
-from generic_airport import Organizador
 
 
 org = ga.Organizador()
@@ -16,7 +15,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "no importa ahora"
 
 
-## Create a form class
+### FORM CLASES
 class UserForm(FlaskForm):
     validators = [DataRequired()]
     nombreCompleto  = StringField("Name", validators=validators)
@@ -52,7 +51,6 @@ class AvionForm(FlaskForm):
     longitudAla         = StringField("Longitud de Ala", validators=validators)
     capacidadToneladas  = StringField("Capacidad (Toneladas)", validators=validators)
     submit     = SubmitField("Submit") 
-
 
 ### ROUTES
 @app.route ( '/' )
